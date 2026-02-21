@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Hijyeni Prodesür Projesi </title>
+    <!-- Use Tailwind CSS via CDN for rapid premium styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            /* Tailwind Slate 900 */
+            color: #f8fafc;
+            /* Tailwind Slate 50 */
+        }
+
+        .video-container {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .video-container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.15), 0 8px 10px -6px rgba(56, 189, 248, 0.1);
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #38bdf8, #818cf8);
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col items-center pb-20">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-6xl mx-auto pt-20 pb-16 px-6 text-center">
+        <div
+            class="inline-block px-4 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-sm font-semibold mb-6 uppercase tracking-wider">
+            El Hijyeni Prodesür Projesi
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6">
+            El Hijyeni <span class="gradient-text">Görüntü İşleme Modeli </span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            Klinik el yıkama protokollerinin kritik adımını sınıflandırmak için kullanılır.
+            Bu gösterim, ham klinik görüntüleri yapay zeka tarafından etiketlenmiş referans noktalarıyla karşılaştırarak
+            sergiler.
+        </p>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="w-full max-w-7xl mx-auto px-6 space-y-24" id="showcase-content">
+        <!-- Javascript will populate the steps here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-6xl mx-auto mt-32 pt-8 border-t border-slate-800 text-center text-slate-500">
+        <p>Nozokomiyal Enfeksiyonları Önlemede El Hijyeni Projesi için Geliştirilmiştir. </p>
+    </footer>
+
+    <!-- Rendering Script -->
+    <script>
+        const steps = [
+            { id: "Step_1", name: "Adım 1: Avuç İçi Birbirine Sürtün" },
+            { id: "Step_2_Left", name: "Adım 2 (Sol): Sağ Avuç İçi Sol El Sırtına" },
+            { id: "Step_2_Right", name: "Adım 2 (Sağ): Sol Avuç İçi Sağ El Sırtına" },
+            { id: "Step_3", name: "Adım 3: Parmaklar Kenetlenmiş Halde Avuç İçi Avuç İçine" },
+            { id: "Step_4_Left", name: "Adım 4 (Sol): Parmak Sırtları Karşı Avuç İçine" },
+            { id: "Step_4_Right", name: "Adım 4 (Sağ): Parmak Sırtları Karşı Avuç İçine" },
+            { id: "Step_5_Left", name: "Adım 5 (Sol): Sol Başparmağın Dairesel Sürtünmesi" },
+            { id: "Step_5_Right", name: "Adım 5 (Sağ): Sağ Başparmağın Dairesel Sürtünmesi" },
+            { id: "Step_6_Left", name: "Adım 6 (Sol): İleri ve Geri Dairesel Sürtünme" },
+            { id: "Step_6_Right", name: "Adım 6 (Sağ): İleri ve Geri Dairesel Sürtünme" },
+            { id: "Step_7_Left", name: "Adım 7 (Sol): Sol Bileğin Dairesel Sürtünmesi" },
+            { id: "Step_7_Right", name: "Adım 7 (Sağ): Sağ Bileğin Dairesel Sürtünmesi" }
+        ];
+
+        const container = document.getElementById('showcase-content');
+
+        steps.forEach((step, index) => {
+            const rawVideoPath = `assets/${step.id}_raw.mp4`;
+            const annoVideoPath = `assets/${step.id}_annotated.mp4`;
+
+            const html = `
+                <section class="flex flex-col items-center">
+                    <div class="w-full flex items-center mb-8">
+                        <div class="h-px bg-slate-800 flex-grow"></div>
+                        <h2 class="px-6 text-2xl font-semibold text-slate-200">${step.name}</h2>
+                        <div class="h-px bg-slate-800 flex-grow"></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+                        <!-- Source Video -->
+                        <div class="flex flex-col">
+                            <h3 class="text-sm font-medium text-slate-400 mb-3 uppercase tracking-wider"><span class="w-2 h-2 inline-block rounded-full bg-slate-500 mr-2"></span>Kaynak Görüntü</h3>
+                            <div class="video-container rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700/50 relative aspect-[4/3]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="${rawVideoPath}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+
+                        <!-- Annotated Video -->
+                        <div class="flex flex-col">
+                            <h3 class="text-sm font-medium text-sky-400 mb-3 uppercase tracking-wider"><span class="w-2 h-2 inline-block rounded-full bg-sky-500 mr-2 shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>Görüntü İşleme İle Tanımlanan Görüntü</h3>
+                            <div class="video-container rounded-xl overflow-hidden bg-slate-800/50 border border-sky-500/30 relative aspect-[4/3]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="${annoVideoPath}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        });
+    </script>
+</body>
+
+</html>
